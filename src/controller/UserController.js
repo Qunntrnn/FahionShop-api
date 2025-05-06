@@ -2,7 +2,13 @@ const UserService = require("../service/UserService");
 
 const CreateUser = async (req, res) => {
   try {
-    console.log(req.body);
+    const { name, email, password, confirmPassword, phone } = req.body;
+    if (!name || !email || !password || !confirmPassword || !phone) {
+      return res.status(200).json({
+        status: "ERR",
+        message: "The input is required",
+      });
+    }
     const res = await UserService.createUser();
     return res.status(200).json();
   } catch (error) {
