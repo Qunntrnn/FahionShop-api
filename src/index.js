@@ -1,7 +1,8 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const { default: mongoose } = require("mongoose");
 dotenv.config();
+
+const { default: mongoose } = require("mongoose");
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -11,9 +12,7 @@ app.get("/", (req, res) => {
 });
 
 mongoose
-  .connect(
-    `mongodb+srv://QuanNT:m0TYn2ejX5oXZWmT@cluster0.bmpouyw.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
-  )
+  .connect(`${process.env.MONGO_DB}`)
   .then(() => {
     console.log("Connect Success");
   })
